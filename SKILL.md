@@ -74,7 +74,7 @@ Do not pretend to transfer hidden reasoning, unavailable files, private chain-of
 
 Use this skill alone when needed. If other Prosecode skills are available, preserve their useful state.
 
-### If `session-contracts` is available
+### If `liminate-session-contracts` is available
 
 Read or infer:
 
@@ -89,7 +89,7 @@ Read or infer:
 
 Preserve active corrections prominently. They are high-priority handoff material.
 
-### If `prosecode-intent-compiler` is available
+### If `prosecode-prompt-compiler` is available
 
 Include:
 
@@ -102,7 +102,7 @@ Include:
 
 If no Intent IR is available, infer the current intent from the visible conversation and mark it as inferred.
 
-### If `prosecode-heap-pager` is available
+### If `prosecode-context-pager` is available
 
 Include:
 
@@ -273,7 +273,7 @@ If a target model or tool is named, include it in the title or metadata:
 
 Do not create a `.limn` file by default.
 
-However, if `session-contracts` is active or the user asks for contract integration, also emit an optional `.limn` contract delta.
+However, if `liminate-session-contracts` is active or the user asks for contract integration, also emit an optional `.limn` contract delta.
 
 Example:
 
