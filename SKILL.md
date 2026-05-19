@@ -6,14 +6,15 @@ description: >-
   handoff packet, hand off this session, prepare work for another agent,
   package context for Codex, Claude, ChatGPT, Gemini, Cursor, or summarize
   the working state. Produces a structured Markdown packet that preserves
-  verified sources, inferred claims, locked decisions, open questions, active
-  user corrections, retained context, and boundaries on what the next agent
-  may honestly claim.
+  verified sources, inferred claims, locked decisions, open questions,
+  active user corrections, session artifacts, retained context, and
+  boundaries on what the next agent may honestly claim. Co-triggers
+  liminate-session-contracts if not already active.
 license: MIT
 metadata:
   author: rmichaelthomas
-  version: "0.1.0"
-  provenance: "Prosecode continuity stack + Liminate session contracts + cross-agent handoff discipline"
+  version: "0.2.0"
+  provenance: "Prosecode continuity stack + Liminate session contracts + cross-agent handoff discipline + rmt-working-documents naming convention integration"
 ---
 
 # Prosecode Handoff Packet
@@ -25,6 +26,50 @@ This skill creates a continuity transfer object: a structured Markdown packet th
 It is not a normal summary. A summary says what happened. A handoff packet says what the next agent needs in order to continue honestly, usefully, and safely.
 
 A handoff packet is useful only if it preserves uncertainty as carefully as it preserves progress.
+
+---
+
+## Pre-Handoff Protocol
+
+### Step 0: Session contract
+
+If a session contract is not already open, open one now. This is Step 0 — it runs before any other work. The handoff is a high-stakes moment where verification state matters most — the packet needs to accurately distinguish verified from inferred claims, and the contract is the mechanical backing for that distinction. Follow the two-channel protocol from `liminate-session-contracts`.
+
+**Sequencing with session-end protocol:** If a session contract IS active, the contract's session-end protocol (emit final contract, generate Receipts permalink, close the contract) should run BEFORE the handoff packet is produced. The handoff packet should then include the Receipts permalink as a verified source in section 4. This ensures the contract's verification state is captured and portable.
+
+---
+
+## Relationship to Resume Prompts
+
+A handoff packet is NOT a substitute for a resume prompt. They serve different functions:
+
+- A **handoff packet** transfers working state across agents or tools. It prioritizes epistemic honesty — what's verified, what's inferred, what the next agent must not overclaim.
+- A **resume prompt** transfers session continuity within the rmt-working-documents methodology. It prioritizes context reload — locked decisions, schema counts, open question counts, build status.
+
+If the session produced checkpoint-worthy work, a resume prompt should be produced via `rmt-working-documents` in addition to the handoff packet. The handoff packet can reference the resume prompt (and should, in section 9: Context to Preserve), but does not replace it.
+
+---
+
+## Naming Convention
+
+Handoff packets follow the rmt-working-documents naming methodology:
+
+**Single-domain handoff:**
+`{domain}_handoff_{YYYY_MM_DD}_{subtitle}.md`
+
+**Cross-domain or domain-agnostic handoff:**
+`handoff_{YYYY_MM_DD}_{subtitle}.md`
+
+**Rules:**
+- Underscore-only separators, no hyphens, no spaces
+- Date format: `YYYY_MM_DD`
+- Subtitle should name the target agent or the work being handed off
+- Domain prefix follows the same rules as all other document classes (lowercase, diacritics stripped, derived from vault folder when post-vault)
+
+**Examples:**
+- `liminate_handoff_2026_05_18_codex_build.md`
+- `mobius_handoff_2026_05_18_phase_3_context.md`
+- `handoff_2026_05_18_skill_update_session.md`
 
 ## When to use
 
@@ -139,6 +184,7 @@ Every handoff packet must include these sections, in this order:
 ## 12. Do Not Claim Beyond This
 ## 13. Recommended Next Action
 ## 14. Handoff Notes for the Receiving Agent
+## 15. Session Artifacts
 ```
 
 Each section must be concise but specific.
@@ -255,21 +301,33 @@ Give one direct next action for the receiving agent.
 
 Write short operational notes to the next model or tool. Use a direct, practical tone. Do not flatter, invent fictional continuity, or add vague encouragement.
 
+### 15. Session Artifacts
+
+List every file produced during this session. For each artifact include:
+
+| Artifact | Type | Path | Status |
+|---|---|---|---|
+| {filename} | {type: skill file, build prompt, checkpoint, code, etc.} | {path where it was saved, if known} | {delivered / draft / intermediate} |
+
+This section serves as the manifest — the receiving agent or the next session knows what was produced and where to find it.
+
+After producing the handoff packet, call `present_files` for any session artifacts that are still in the outputs directory so they're downloadable alongside the packet. The packet is the index; the files travel separately.
+
+If no files were produced during the session, state: "No files produced this session."
+
 ## Output rules
 
 Output a Markdown packet.
 
-Default filename:
+Filename follows the naming convention defined above:
 
-```text
-handoff-packet.md
-```
+- Single-domain: `{domain}_handoff_{YYYY_MM_DD}_{subtitle}.md`
+- Cross-domain: `handoff_{YYYY_MM_DD}_{subtitle}.md`
 
-If a target model or tool is named, include it in the title or metadata:
+If a target model or tool is named, include it in the subtitle:
 
-- `codex-handoff-packet.md`
-- `claude-handoff-packet.md`
-- `chatgpt-handoff-packet.md`
+- `liminate_handoff_2026_05_18_codex_build.md`
+- `handoff_2026_05_18_claude_continuation.md`
 
 Do not create a `.limn` file by default.
 
@@ -323,9 +381,11 @@ Before finalizing, also ask internally:
 ```md
 # Handoff Packet
 
+**Filename:** dashboard_handoff_2026_05_18_claude_navigation_redesign.md
 **Created for:** Claude
 **Created by:** Codex
 **Session / project:** Dashboard navigation redesign
+**Receipts permalink:** https://receipts.liminate.dev/c/abc123 (if available)
 
 ## 1. Current Goal
 
@@ -347,6 +407,7 @@ Basis: inferred from visible conversation
 | Source | Type | State | What was verified |
 |---|---|---|---|
 | User-provided screenshots | visible conversation | scanned | Current nav has duplicate account links and unclear grouping. |
+| Session contract | .limn | verified | Receipts permalink: https://receipts.liminate.dev/c/abc123 |
 
 ## 5. Inferred Claims
 
@@ -393,4 +454,11 @@ Draft the final sidebar information architecture.
 ## 14. Handoff Notes for the Receiving Agent
 
 Continue from the locked sidebar decision. Preserve the open billing placement question.
+
+## 15. Session Artifacts
+
+| Artifact | Type | Path | Status |
+|---|---|---|---|
+| dashboard_nav_comparison.md | analysis document | /mnt/user-data/outputs/ | delivered |
+
 ```
