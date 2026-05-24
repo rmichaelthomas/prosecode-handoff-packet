@@ -63,7 +63,7 @@ Liminate is a prose-as-syntax language where plain English sentences execute dir
 | | [prosecode-context-pager](https://github.com/rmichaelthomas/prosecode-context-pager) | Scores conversation history against current intent. Decides what to keep, summarize, or drop. |
 | **← this repo** | [**prosecode-handoff-packet**](https://github.com/rmichaelthomas/prosecode-handoff-packet) | **Packages a working session for another agent to continue — preserving what was verified and what wasn't.** |
 
-→ [onesurface.org/liminate](https://onesurface.org/liminate)
+→ [liminate.dev](https://liminate.dev)
 
 You can use this skill by itself. When the other Prosecode skills are present, the packet preserves their useful state instead of trying to reconstruct it from memory.
 
