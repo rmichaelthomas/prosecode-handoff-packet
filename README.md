@@ -2,6 +2,8 @@
 
 Packages a working session so another agent can continue without the user repeating themselves.
 
+*Part of the Prosecode family — a set of tools for writing, verifying, and transferring structured reasoning.*
+
 It's not a summary. It transfers operational state: current goal, current state, verified sources, inferred claims, locked decisions, open questions, user corrections, context to retain, work completed, work remaining, and the boundaries on what the next agent may claim.
 
 ## What it does
@@ -49,9 +51,9 @@ Review the checkout flow refactor and identify source-backed regressions.
 Inspect the validation helper and checkout tests before writing findings.
 ```
 
-## Part of the Liminate family
+## Built by Liminate
 
-Liminate is a prose-as-syntax programming language where plain English sentences execute directly. These five repos form a system for writing, verifying, and transferring structured reasoning.
+Liminate is a prose-as-syntax language where plain English sentences execute directly. These five repos form a system for writing, verifying, and transferring structured reasoning.
 
 | | Repo | What it does |
 |---|---|---|
