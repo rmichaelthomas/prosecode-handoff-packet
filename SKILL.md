@@ -37,6 +37,8 @@ If a session contract is not already open, open one now. This is Step 0 — it r
 
 **Sequencing with session-end protocol:** If a session contract IS active, the contract's session-end protocol (emit final contract, generate Receipts permalink, close the contract) should run BEFORE the handoff packet is produced. The handoff packet should then include the Receipts permalink as a verified source in section 4. This ensures the contract's verification state is captured and portable.
 
+If the contract was saved local-only (no upload consent, or an unattended session), there will be no Receipts permalink — in that case section 4 records the local contract path and notes that no permalink was generated. A local-only save is a complete, valid handoff source; its absence of a permalink is expected, not a gap.
+
 ---
 
 ## Relationship to Resume Prompts
@@ -385,7 +387,7 @@ Before finalizing, also ask internally:
 **Created for:** Claude
 **Created by:** Codex
 **Session / project:** Dashboard navigation redesign
-**Receipts permalink:** https://receipts.liminate.dev/c/abc123 (if available)
+**Receipts permalink:** https://liminate.dev/c/abc123 (if available)
 
 ## 1. Current Goal
 
@@ -407,7 +409,7 @@ Basis: inferred from visible conversation
 | Source | Type | State | What was verified |
 |---|---|---|---|
 | User-provided screenshots | visible conversation | scanned | Current nav has duplicate account links and unclear grouping. |
-| Session contract | .limn | verified | Receipts permalink: https://receipts.liminate.dev/c/abc123 |
+| Session contract | .limn | verified | Receipts permalink: https://liminate.dev/c/abc123 |
 
 ## 5. Inferred Claims
 
