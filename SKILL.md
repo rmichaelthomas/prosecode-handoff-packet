@@ -14,7 +14,7 @@ license: MIT
 metadata:
   author: rmichaelthomas
   version: "0.2.0"
-  provenance: "Prosecode continuity stack + Liminate session contracts + cross-agent handoff discipline + rmt-working-documents naming convention integration"
+  provenance: "Prosecode continuity stack + Liminate session contracts + cross-agent handoff discipline + rmt-working-documents naming convention integration + Step 0 collapsed and contract-usage rationale relocated to the liminate-session-contracts availability section (July 22, 2026 efficiency pass)"
 ---
 
 # Prosecode Handoff Packet
@@ -33,11 +33,8 @@ A handoff packet is useful only if it preserves uncertainty as carefully as it p
 
 ### Step 0: Session contract
 
-If a session contract is not already open, open one now. This is Step 0 — it runs before any other work. The handoff is a high-stakes moment where verification state matters most — the packet needs to accurately distinguish verified from inferred claims, and the contract is the mechanical backing for that distinction. Follow the two-channel protocol from `liminate-session-contracts`.
-
-**Sequencing with session-end protocol:** If a session contract IS active, the contract's session-end protocol (emit final contract, generate Receipts permalink, close the contract) should run BEFORE the handoff packet is produced. The handoff packet should then include the Receipts permalink as a verified source in section 4. This ensures the contract's verification state is captured and portable.
-
-If the contract was saved local-only (no upload consent, or an unattended session), there will be no Receipts permalink — in that case section 4 records the local contract path and notes that no permalink was generated. A local-only save is a complete, valid handoff source; its absence of a permalink is expected, not a gap.
+Open a session contract if none is active (`liminate-session-contracts`). One
+contract per session, not per skill.
 
 ---
 
@@ -135,6 +132,23 @@ Read or infer:
 - any `.limn` deltas emitted this session
 
 Preserve active corrections prominently. They are high-priority handoff material.
+
+The handoff is a high-stakes moment where verification state matters most —
+the packet needs to accurately distinguish verified from inferred claims, and
+the contract is the mechanical backing for that distinction.
+
+**Sequencing with session-end protocol:** If a session contract IS active, the
+contract's session-end protocol (emit final contract, generate Receipts
+permalink, close the contract) should run BEFORE the handoff packet is
+produced. The handoff packet should then include the Receipts permalink as a
+verified source in section 4. This ensures the contract's verification state
+is captured and portable.
+
+If the contract was saved local-only (no upload consent, or an unattended
+session), there will be no Receipts permalink — in that case section 4 records
+the local contract path and notes that no permalink was generated. A
+local-only save is a complete, valid handoff source; its absence of a
+permalink is expected, not a gap.
 
 ### If `prosecode-prompt-compiler` is available
 
