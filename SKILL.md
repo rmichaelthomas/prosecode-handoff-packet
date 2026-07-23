@@ -14,7 +14,7 @@ license: MIT
 metadata:
   author: rmichaelthomas
   version: "0.2.0"
-  provenance: "Prosecode continuity stack + Liminate session contracts + cross-agent handoff discipline + rmt-working-documents naming convention integration + Step 0 collapsed and contract-usage rationale relocated to the liminate-session-contracts availability section (July 22, 2026 efficiency pass)"
+  provenance: "Prosecode continuity stack + Liminate session contracts + cross-agent handoff discipline + rmt-working-documents naming convention integration + Step 0 collapsed and contract-usage rationale relocated to the liminate-session-contracts availability section (July 22, 2026 efficiency pass) + sections 6/7/10/11/13 cross-referenced to rmt-working-documents' Resume Prompt Requirements instead of re-deriving the shared core, and the redundant trigger-phrase list compressed (July 22, 2026 length pass) — the worked example and per-section guidance were left intact as load-bearing reference material, not cut for length's sake"
 ---
 
 # Prosecode Handoff Packet
@@ -47,6 +47,8 @@ A handoff packet is NOT a substitute for a resume prompt. They serve different f
 
 If the session produced checkpoint-worthy work, a resume prompt should be produced via `rmt-working-documents` in addition to the handoff packet. The handoff packet can reference the resume prompt (and should, in section 9: Context to Preserve), but does not replace it.
 
+**Shared content core.** Sections 6 (Locked Decisions), 7 (Open Questions), 10-11 (Work Completed / Not Yet Completed), and 13 (Recommended Next Action) draw on the same minimum-content list as `rmt-working-documents`' Resume Prompt Requirements — prior decisions still in force, what changed, open question counts, build status, the specific next thread. If a resume prompt already exists for this session, pull from it directly rather than re-deriving. If none exists, apply that list. What this packet adds on top is the epistemic layer specific to cross-agent handoff: which of those claims are verified versus inferred (sections 4-5), the user's engagement corrections (section 8), and the explicit boundary on what the next agent may claim (section 12).
+
 ---
 
 ## Naming Convention
@@ -74,18 +76,9 @@ Handoff packets follow the rmt-working-documents naming methodology:
 
 Use this skill when the user asks for:
 
-- "create a handoff packet"
-- "handoff this session"
-- "prepare this for another agent"
-- "package this for Codex"
-- "package this for Claude"
-- "package this for ChatGPT"
-- "package this for Gemini"
-- "package this for Cursor"
-- "summarize the working state"
-- "handoff packet"
-- "continue this in another model"
-- "make this portable"
+- "create a handoff packet" / "handoff packet" / "handoff this session"
+- "prepare this for another agent" / "package this for" {Codex, Claude, ChatGPT, Gemini, Cursor}
+- "summarize the working state" / "continue this in another model" / "make this portable"
 
 Also use when:
 
@@ -262,11 +255,11 @@ Use direct language:
 
 ### 6. Locked Decisions
 
-List decisions the user explicitly approved or that were clearly locked. Do not include suggestions that were not approved.
+Shared core — see Relationship to Resume Prompts. List decisions the user explicitly approved or that were clearly locked. Do not include suggestions that were not approved.
 
 ### 7. Open Questions
 
-List unresolved questions. If none are visible, say:
+Shared core — see Relationship to Resume Prompts. List unresolved questions. If none are visible, say:
 
 ```md
 No open questions visible in the current context.
@@ -292,11 +285,11 @@ Include context that the next agent should retain raw or near-raw, such as exact
 
 ### 10. Work Completed
 
-List what has already been done so the next agent does not repeat it.
+Shared core — see Relationship to Resume Prompts. List what has already been done so the next agent does not repeat it.
 
 ### 11. Work Not Yet Completed
 
-List remaining work. Do not over-expand into a project plan unless the user asked for one.
+Shared core — see Relationship to Resume Prompts. List remaining work. Do not over-expand into a project plan unless the user asked for one.
 
 ### 12. Do Not Claim Beyond This
 
@@ -311,7 +304,7 @@ This section is required.
 
 ### 13. Recommended Next Action
 
-Give one direct next action for the receiving agent.
+Shared core — see Relationship to Resume Prompts. Give one direct next action for the receiving agent.
 
 ### 14. Handoff Notes for the Receiving Agent
 
